@@ -6,6 +6,9 @@ WHERE year_release = 2018;
 SELECT name, length FROM tracks
 ORDER BY length DESC 
 LIMIT 1;
+-- тоже самое(кооректный запрос, если треков несколько)
+SELECT name, length  FROM tracks WHERE 
+    length = (SELECT MAX(length) FROM tracks);
 
 -- название треков, продолжительность которых не менее 3,5 минуты;
 SELECT name FROM tracks
