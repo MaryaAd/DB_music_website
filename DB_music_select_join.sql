@@ -22,6 +22,15 @@ JOIN artists ar ON ar.artist_id = aa.artist_id
 WHERE al.year_release = 2020
 GROUP BY ar.name;
 
+SELECT DISTINCT a.name FROM artists a 
+		WHERE a.name NOT IN (
+				SELECT DISTINCT a.name FROM artists a 
+				LEFT JOIN artists_albums aa ON a.artist_id = aa.artist_id 
+				LEFT JOIN albums al ON al.album_id = aa.album_id 
+				WHERE al.year_release = 2020
+				)
+		ORDER BY a.name;
+
 -- названия сборников, в которых присутствует конкретный исполнитель (выберите сами);
 SELECT c.name FROM collection c 
 JOIN collection_tracks ct ON c.collection_id = ct.collection_id 
